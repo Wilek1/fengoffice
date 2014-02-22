@@ -27,6 +27,8 @@ class SmsController extends ApplicationController
 
     private $msgBody;
 
+    private $fengOfficeURL = ROOT_URL;
+
     /**
      * The constructor initializes the configuration properties
      * of this object
@@ -79,19 +81,18 @@ class SmsController extends ApplicationController
 
         );
 
-
         return $this->server_ip . $this->action . "?" . http_build_query($data);
-        //$this->username . $this->password . $this->origin . $this->recipient . $this->msgBody;
-
     }
 
 
-    function prepareTaskSms($displayName, $taskTitle)
+    function prepareTaskSubscriberSms($displayName, $taskTitle)
     {
+        $this->msgBody = "Dear, " . $displayName . ', There has been activity on Task "' . $taskTitle . '". To which you are a subscriber, please login to the system ' . $this->fengOfficeURL;
+    }
 
-
-        $this->msgBody = "Dear, " . $displayName . ', There has been activity on Task "' . $taskTitle . '". To which you are a subscriber, please login to the system http://localhost/fengoffice/ ';
-
+    function prepareTaskAssignSms($displayName, $taskTitle)
+    {
+        $this->msgBody = "Dear, " . $displayName . ', There has been activity on Task "' . $taskTitle . '". Which has been assigned to you, please login to the system ' . $this->fengOfficeURL;
     }
 
 
