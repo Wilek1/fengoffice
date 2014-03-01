@@ -45,10 +45,9 @@ class ObjectController extends ApplicationController
                     $user = Users::findById($user_id);
                     if ($user instanceof User) {
                         $object->subscribeUser($user);
-
                         $phone_num = Users::getPhoneNumberCustomProperty($user_id);
                         $sms_obj = new SmsController();
-                        $sms_obj->prepareTaskSubscriberSms($user->getDisplayName(), $object->getTitle());
+                        $sms_obj->prepareSubscriberSms($user->getDisplayName(), $object->getTitle(),get_class($object));
                         $sms_obj->sendSms($phone_num);
                         $log_info .= ($log_info == "" ? "" : ",") . $user->getId();
                     }
