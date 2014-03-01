@@ -522,7 +522,7 @@ class Notifier
             $user = $task->getAssignedTo();
             $phone_num = Users::getPhoneNumberCustomProperty($user->getObjectId());
             $sms_obj = new SmsController();
-            $sms_obj->prepareTaskAssignSms($user->getDisplayName(), $task->getTitle());
+            $sms_obj->prepareAssignSms($user->getDisplayName(), $task->getTitle(),get_class($task));
             $sms_obj->sendSms($phone_num);
 
         } else if ($task->getAssignedTo() instanceof Company) {
