@@ -1,4 +1,3 @@
-<?php die(); ?>
 Session "default" started at 2013-12-25T19:19:20+0000
 #1 ERROR: Error: Use of undefined constant STDOUT - assumed 'STDOUT' in '/var/www/fengoffice/console.php' on line 8 (error code: 8)
 #2 ERROR: Error: fwrite() expects parameter 1 to be resource, string given in '/var/www/fengoffice/console.php' on line 8 (error code: 2)
@@ -98,4 +97,54 @@ Time since start: 1.2777209281921 seconds
 Session "default" started at 2014-02-20T23:12:30+0000
 #1 ERROR: Error: Cannot modify header information - headers already sent by (output started at /var/www/fengoffice/application/controllers/ObjectController.class.php:53) in '/var/www/fengoffice/application/layouts/json.php' on line 1 (error code: 2)
 Time since start: 0.56770801544189 seconds
+-------------------------------------------------------------------------------
+
+Session "default" started at 2014-03-01T20:05:25+0000
+#1 ERROR: Error: Undefined variable: users_to_inv in '/var/www/fengoffice/application/controllers/EventController.class.php' on line 851 (error code: 8)
+Time since start: 0.11378502845764 seconds
+-------------------------------------------------------------------------------
+
+Session "default" started at 2014-03-01T20:05:54+0000
+#1 ERROR: Error: Undefined variable: users_to_inv in '/var/www/fengoffice/application/controllers/EventController.class.php' on line 851 (error code: 8)
+Time since start: 0.27865386009216 seconds
+-------------------------------------------------------------------------------
+
+Session "default" started at 2014-03-01T20:08:29+0000
+#1 ERROR: Error: Undefined variable: users_to_invite in '/var/www/fengoffice/application/controllers/EventController.class.php' on line 851 (error code: 8)
+Time since start: 0.11460089683533 seconds
+-------------------------------------------------------------------------------
+
+Session "default" started at 2014-03-01T20:30:34+0000
+#1 ERROR: Error: Undefined variable: us in '/var/www/fengoffice/application/controllers/EventController.class.php' on line 867 (error code: 8)
+Time since start: 0.13500595092773 seconds
+-------------------------------------------------------------------------------
+
+Session "default" started at 2014-03-01T20:30:58+0000
+#1 ERROR: Error: Undefined variable: us in '/var/www/fengoffice/application/controllers/EventController.class.php' on line 867 (error code: 8)
+Time since start: 50.7442278862 seconds
+-------------------------------------------------------------------------------
+
+Session "default" started at 2014-03-01T20:31:49+0000
+#1 ERROR: Error: Undefined variable: us in '/var/www/fengoffice/application/controllers/EventController.class.php' on line 867 (error code: 8)
+Time since start: 50.868232965469 seconds
+-------------------------------------------------------------------------------
+
+Session "default" started at 2014-03-01T20:33:46+0000
+#1 ERROR: Error: Undefined variable: us in '/var/www/fengoffice/application/controllers/EventController.class.php' on line 867 (error code: 8)
+Time since start: 50.970873117447 seconds
+-------------------------------------------------------------------------------
+
+Session "default" started at 2014-03-01T20:35:08+0000
+#1 ERROR: Error: Undefined variable: us in '/var/www/fengoffice/application/controllers/EventController.class.php' on line 867 (error code: 8)
+Time since start: 0.14503693580627 seconds
+-------------------------------------------------------------------------------
+
+Session "default" started at 2014-03-01T20:38:47+0000
+#1 ERROR: Error: Undefined variable: us in '/var/www/fengoffice/application/controllers/EventController.class.php' on line 867 (error code: 8)
+Time since start: 1.4130001068115 seconds
+-------------------------------------------------------------------------------
+
+Session "default" started at 2014-03-01T20:40:53+0000
+#1 ERROR: Error: Undefined variable: us in '/var/www/fengoffice/application/controllers/EventController.class.php' on line 867 (error code: 8)
+Time since start: 0.33292388916016 seconds
 -------------------------------------------------------------------------------

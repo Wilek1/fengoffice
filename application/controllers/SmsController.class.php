@@ -85,14 +85,20 @@ class SmsController extends ApplicationController
     }
 
 
-    function prepareTaskSubscriberSms($displayName, $taskTitle)
+    function prepareSubscriberSms($displayName, $taskTitle, $objName)
     {
-        $this->msgBody = "Dear, " . $displayName . ', There has been activity on Task "' . $taskTitle . '". To which you are a subscriber, please login to the system ' . $this->fengOfficeURL;
+        $this->msgBody = "Dear, " . $displayName . ', There has been activity on ' . $objName . ' "' . $taskTitle . '". To which you are a subscriber, please login to the system ' . $this->fengOfficeURL;
     }
 
-    function prepareTaskAssignSms($displayName, $taskTitle)
+    function prepareEventInvitee($displayName, $taskTitle, $objName)
     {
-        $this->msgBody = "Dear, " . $displayName . ', There has been activity on Task "' . $taskTitle . '". Which has been assigned to you, please login to the system ' . $this->fengOfficeURL;
+        $this->msgBody = "Dear, " . $displayName . ', There has been activity on ' . $objName . ' "' . $taskTitle . '". To which you are invited, please login to the system ' . $this->fengOfficeURL;
+    }
+
+
+    function prepareAssignSms($displayName, $taskTitle, $objName)
+    {
+        $this->msgBody = "Dear, " . $displayName . ', There has been activity on ' . $objName . ' "' . $taskTitle . '". Which has been assigned to you, please login to the system ' . $this->fengOfficeURL;
     }
 
 
