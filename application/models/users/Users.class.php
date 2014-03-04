@@ -236,10 +236,10 @@ class Users extends BaseUsers
      * fetch user phone number where it is available
      * Added By aqureshi
      */
-    function getPhoneNumberCustomProperty($user_ids)
+    function getPhoneNumberCustomProperty($user_idss)
     {
         $cstm_users_table = CustomPropertyValues::instance()->getTableName(true);
-        $sql = "SELECT id, object_id,custom_property_id , `value`  FROM $cstm_users_table WHERE (`object_id` in ( $user_ids ) ) ";
+        $sql = "SELECT id, object_id,custom_property_id , `value`  FROM $cstm_users_table WHERE (`object_id` in ( $user_idss ) ) ";
         $rows = DB::executeAll($sql);
 
         if (is_array($rows)) {

@@ -385,8 +385,23 @@ class EventController extends ApplicationController {
             				$users_to_inv[] = Users::findById(array('id' => $us));
             			}
             		}
+
             		Notifier::notifEvent($event, $users_to_inv, 'new', logged_user());
 		        }
+
+                foreach ($data['users_to_invite'] as $user_id => $v) {
+
+                    $user = Users::findById(array('id' => $user_id));
+                    if ($user instanceof User) {
+                        $phone_num = Users::getPhoneNumberCustomProperty($user_id);
+                        $sms_obj = new SmsController();
+                        $sms_obj->prepareEventInvitee($user->getDisplayName(), $event->getTitle(), get_class($event));
+                        $sms_obj->sendSms($phone_num);
+                    }
+
+                }
+
+
 		        
 		        if (array_var($_POST, 'popup', false)) {
 		        	$_POST['ws_ids'] = active_or_personal_project()->getId();
@@ -836,6 +851,7 @@ class EventController extends ApplicationController {
 	            	$this->change_invitation_state($data['confirmAttendance'], $event->getId(), $user_filter);
 	            }
 
+
 	            if (isset($data['send_notification']) && $data['send_notification']) {
 					$users_to_inv = array();
             		foreach ($data['users_to_invite'] as $us => $v) {
@@ -845,7 +861,19 @@ class EventController extends ApplicationController {
             		}
             		Notifier::notifEvent($event, $users_to_inv, 'modified', logged_user());
 	            }
-				    
+
+                foreach ($data['users_to_invite'] as $user_id => $v) {
+
+                    $user = Users::findById(array('id' => $user_id));
+                    if ($user instanceof User) {
+                        $phone_num = Users::getPhoneNumberCustomProperty($user_id);
+                        $sms_obj = new SmsController();
+                        $sms_obj->prepareEventInvitee($user->getDisplayName(), $event->getTitle(), get_class($event));
+                        $sms_obj->sendSms($phone_num);
+                    }
+
+                }
+
 			    if(!logged_user()->isMemberOfOwnerCompany()) $event->setIsPrivate(false);  				
 	          
 	          	DB::beginWork();
