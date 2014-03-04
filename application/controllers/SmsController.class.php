@@ -61,8 +61,18 @@ class SmsController extends ApplicationController
 
         $this->recipient = $p_num;
 
-        if ($p_num != null && !empty($p_num) && $this->msgBody != null && !empty($this->msgBody))
-            file_get_contents($this->_getSmsUrl());
+        if ($p_num != null && !empty($p_num) && $this->msgBody != null && !empty($this->msgBody)) {
+
+
+            $res = file_get_contents($this->_getSmsUrl());
+
+
+            if (!empty($res))
+                SmsLogs::createLog($p_num, $res, $this->_parseXML($res) ? SmsLogs::SMS_LOG_CATEGORY_SUCCESS : SmsLogs::SMS_LOG_CATEGORY_FAILURE);
+            else {
+                SmsLogs::createLog($p_num, $res, SmsLogs::SMS_LOG_CATEGORY_FAILURE);
+            }
+        }
     }
 
     /**
@@ -84,22 +94,79 @@ class SmsController extends ApplicationController
         return $this->server_ip . $this->action . "?" . http_build_query($data);
     }
 
-
+    /**
+     * @param $displayName
+     * @param $taskTitle
+     * @param $objName
+     */
     function prepareSubscriberSms($displayName, $taskTitle, $objName)
     {
         $this->msgBody = "Dear, " . $displayName . ', There has been activity on ' . $objName . ' "' . $taskTitle . '". To which you are a subscriber, please login to the system ' . $this->fengOfficeURL;
     }
 
+    /**
+     * @param $displayName
+     * @param $taskTitle
+     * @param $objName
+     */
     function prepareEventInvitee($displayName, $taskTitle, $objName)
     {
         $this->msgBody = "Dear, " . $displayName . ', There has been activity on ' . $objName . ' "' . $taskTitle . '". To which you are invited, please login to the system ' . $this->fengOfficeURL;
     }
 
-
+    /**
+     * @param $displayName
+     * @param $taskTitle
+     * @param $objName
+     */
     function prepareAssignSms($displayName, $taskTitle, $objName)
     {
         $this->msgBody = "Dear, " . $displayName . ', There has been activity on ' . $objName . ' "' . $taskTitle . '". Which has been assigned to you, please login to the system ' . $this->fengOfficeURL;
     }
 
+    /**
+     * Parse XML from SMS server response and figure out the response code
+     * @param $xmlstr
+     * @return bool
+     */
+
+    function _parseXML($xmlstr)
+    {
+
+
+        /**
+         *
+         * Sample XML Response from API Call
+         * Any statuscode greater than 0 is considered an error
+         * <response>
+         * <action>sendmessage</action>
+         *  <data>
+         *        <acceptreport>
+         *        <statuscode>1547</statuscode>
+         *        <statusmessage>Message not accepted for delivery. ERROR 1547: Insufficient credits.</statusmessage>
+         *        <messageid>4fd5a129-03a5-4e82-8c60-1c227133745b</messageid>
+         *        <originator>test</originator>
+         *        <recipient>92334XXXXXXX</recipient>
+         *        <messagetype>SMS:TEXT</messagetype>
+         *        <messagedata>Sms from Feng Office</messagedata>
+         *        </acceptreport>
+         *   </data>
+         *        </response>
+         *
+         **/
+
+
+        $xmlObj = new SimpleXMLElement($xmlstr);
+
+        if ($xmlObj) {
+
+            if ($xmlObj->data[0]->acceptreport[0]->statuscode > 0)
+                return FALSE;
+            else
+                return TRUE;
+        } else
+            return FALSE;
+
+    }
 
 }
