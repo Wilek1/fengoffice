@@ -1227,3 +1227,17 @@ CREATE TABLE  `<?php echo $table_prefix ?>administration_logs` (
   KEY `created_on` (`created_on`),
   KEY `category` (`category`)
 ) ENGINE=<?php echo $engine ?> <?php echo $default_charset ?>;
+
+-- Added as a part of custom functionality for Sms Logging by aaqureshi 4th March 2014
+
+
+CREATE TABLE  `<?php echo $table_prefix ?>sms_logs` (
+`id` int(10) unsigned NOT NULL auto_increment,
+`created_on` datetime NOT NULL default '0000-00-00 00:00:00',
+`number` varchar(50) NOT NULL default '',
+`log_data` text NOT NULL,
+`result` enum('success','failure') NOT NULL,
+PRIMARY KEY  (`id`),
+KEY `created_on` (`created_on`),
+KEY `category` (`category`)
+) ENGINE=<?php echo $engine ?> <?php echo $default_charset ?>;
