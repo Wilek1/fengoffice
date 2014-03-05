@@ -17,7 +17,7 @@ Frontend Changes
 After standard installation of FengOffice, follow these steps to create a mandatory field for cellphone numbers to Users.
 
 * Navigate to Administration -> Custom Properties
-* Select `User` from dropwon
+* Select `User` from dropdown
 * Add a new field named `Phone Number` and check the required and visible by default options
 * Save those changes
 
