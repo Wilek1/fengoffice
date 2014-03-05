@@ -6,7 +6,7 @@
  *
  * Primary Objective of this call is to invoke
  *
- * @author aqureshi
+ * @author aaqureshi
  */
 
 class SmsController extends ApplicationController
@@ -95,6 +95,10 @@ class SmsController extends ApplicationController
     }
 
     /**
+     *
+     * Prepare message body for subscriber. (This is a generic message which will be sent on every operation which involves adding
+     * subscribers to the system)
+     *
      * @param $displayName
      * @param $taskTitle
      * @param $objName
@@ -105,6 +109,8 @@ class SmsController extends ApplicationController
     }
 
     /**
+     * Prepare message body for event invitee
+     *
      * @param $displayName
      * @param $taskTitle
      * @param $objName
@@ -115,6 +121,8 @@ class SmsController extends ApplicationController
     }
 
     /**
+     * Prepare message body for Assignee
+     *
      * @param $displayName
      * @param $taskTitle
      * @param $objName
@@ -156,16 +164,16 @@ class SmsController extends ApplicationController
          **/
 
 
-        $xmlObj = new SimpleXMLElement($xmlstr);
+        $xmlObj = new SimpleXMLElement($xmlstr); //Parsing XML to make a simple xml element object
 
         if ($xmlObj) {
 
             if ($xmlObj->data[0]->acceptreport[0]->statuscode > 0)
-                return FALSE;
+                return FALSE; // Return False if statuscode is greater than zero.
             else
-                return TRUE;
+                return TRUE; // Return True if statuscode is zero
         } else
-            return FALSE;
+            return FALSE; // Return False if XML couldnt prepare a valid SimpleXMLElement Object
 
     }
 
