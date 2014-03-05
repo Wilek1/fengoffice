@@ -9,6 +9,7 @@ SMS API from [E.OCEAN](http://eocean.pk/) has been integrated in this FengOffice
 Sms Events have been attached on
 * A new event is created/modified sms to its subscribers and invitees is sent.
 * A new task is created/modified sms to its subcribers and assignee is sent.
+* Any event that adds subscriber to its operation. A sms will be generated to the subscribers about it.
 
 Frontend Changes
 ----------------
